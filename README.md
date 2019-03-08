@@ -790,10 +790,6 @@ public class JwtTokenResponse implements Serializable {
 
 Congratulations on joining this course from in28Minutes. 
 
-We have 14,000+ 5 Star reviews on our courses.  
-
-I hope that by the time you are prompted to leave a review, that you think this course is an amazing course and can write a few sentences about what you like about the course for future students to see.
-
 There are three things you need to understand before you start this course!
 
 1...... Listen + See + Do Hands-on + Repeat = 90% Retention
@@ -805,7 +801,7 @@ Set 1 hour aside every day for the next week for this course! No exceptions allo
 3...... Udemy asks you for a review very early in the course! If you are not ready for giving a review, you can skip giving a review.
 
 Thank you and enjoy the course,
-Ranga
+Ranga From in28Minutes
 ```
 
 ### Thank You for completing the course message
@@ -813,10 +809,9 @@ Ranga
 ```
 Congratulations on completing the course from in28Minutes.
 
-We have 14,000+ 5 Star reviews on our courses. We hope you think this course is an amazing course and can write a few sentences about what you like about the course for future students to see.
-
 Good Luck for your future.
 
+Thank you ,
 Ranga from in28Minutes
 ```
 
@@ -2752,3 +2747,84 @@ class Counter extends React.Component {
 }
 
 React.render(<Application name="Ranga" todo={{desc:'Learn Angular 8'}}/> , document.getElementById('app'));
+
+
+### Last Attempt
+
+import React, { Component } from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import './App.css';
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Router>
+          <>
+            <Route exact path="/" component={LoginComponent} />
+            <Route path="/login" component={LoginComponent} />
+            <Route path="/welcome" component={WelcomeComponent} />
+          </>
+        </Router>
+      </div>
+    );
+  }
+}
+
+
+class LoginComponent extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: 'in28minutes',
+      password: '',
+      hasLoginFailed: false,
+      message: ''
+    }
+  }
+  
+  handleUsernameChange = (event) => {
+    this.setState({ username: event.target.value });
+  }
+
+  handlePasswordChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  loginClicked = (e) => {
+    if(this.state.username==='in28minutes' && this.state.password==='dummy') {
+      this.props.history.push('/welcome');
+    } else {
+      this.setState({ hasLoginFailed: true })
+    }
+
+  }
+  
+  render() {
+    return (
+      <div className="LoginComponent">
+          <div>{this.state.message}</div>
+          <ShowValidationMessage showErrorMessage={this.state.hasLoginFailed}/>
+          <input type="text" name="username" value={this.state.username}  onChange={this.handleUsernameChange} />
+          <input type="password" name="password" value={this.state.password} onChange={this.handlePasswordChange}/>
+          <button onClick={this.loginClicked}>Login</button>
+          {/*<br/>
+          {this.state.username} - {this.state.password}*/}
+      </div>
+    )
+  }
+}
+
+function ShowValidationMessage(props) {
+  if(props.showErrorMessage) {
+    return <div>Please enter valid credentials</div>
+  }
+  return null
+}
+
+function WelcomeComponent() {
+    return <div>Welcome to in28Minutes </div>
+}
+
+export default App;
