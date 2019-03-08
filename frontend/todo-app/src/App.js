@@ -5,6 +5,7 @@ import ThirdComponent from './components/learning-examples/ThirdComponent'
 import Counter from './components/counter/Counter'
 import TodoApp from './components/todo/TodoApp'
 import './App.css';
+import './bootstrap.css';
 
 class App extends Component {
   render() {
