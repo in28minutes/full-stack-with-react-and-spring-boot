@@ -246,13 +246,11 @@ class ListTodosComponent extends Component {
         console.log('constructor')
         super(props)
         this.state = {
-            todos : 
-             [
-            //  {id: 1, description : 'Learn to Dance', done:false, targetDate: new Date()},
-            //  {id: 2, description : 'Become an Expert at React', done:false, targetDate: new Date()},
-            //  {id: 3, description : 'Visit India', done:false, targetDate: new Date()}
-            ]
+            todos : [],
+            message : null
         }
+        this.deleteTodoClicked = this.deleteTodoClicked.bind(this)   
+        this.refreshTodos = this.refreshTodos.bind(this)
     }
 
     componentWillUnmount() {
@@ -268,6 +266,11 @@ class ListTodosComponent extends Component {
 
     componentDidMount() {
         console.log('componentDidMount')
+        this.refreshTodos();
+        console.log(this.state)
+    }
+
+    refreshTodos() {
         let username = AuthenticationService.getLoggedInUserName()
         TodoDataService.retrieveAllTodos(username)
           .then(
@@ -276,7 +279,19 @@ class ListTodosComponent extends Component {
                   this.setState({todos : response.data})
               }
           ) 
-        console.log(this.state)
+    }
+
+    deleteTodoClicked(id) {
+        let username = AuthenticationService.getLoggedInUserName()
+        //console.log(id + " " + username);
+        TodoDataService.deleteTodo(username, id)
+         .then (
+             response => {
+                this.setState({message : `Delete of todo ${id} Successful`})
+                this.refreshTodos()
+             }
+         )
+        
     }
 
     render() {
@@ -284,6 +299,7 @@ class ListTodosComponent extends Component {
         return (
             <div>
                  <h1>List Todos</h1>
+                 {this.state.message && <div class="alert alert-success">{this.state.message}</div>}
                  <div className="container">
                     <table className="table">
                         <thead>
@@ -291,6 +307,7 @@ class ListTodosComponent extends Component {
                                 <th>Description</th>
                                 <th>Target Date</th>
                                 <th>IsCompleted?</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -301,6 +318,7 @@ class ListTodosComponent extends Component {
                                         <td>{todo.description}</td>
                                         <td>{todo.done.toString()}</td>
                                         <td>{todo.targetDate.toString()}</td>
+                                        <td><button className="btn btn-warning" onClick={() => this.deleteTodoClicked(todo.id)}>Delete</button></td>
                                     </tr>
                             )
                             }
@@ -811,6 +829,12 @@ class TodoDataService {
         //console.log('executed service')
         return axios.get(`http://localhost:8080/users/${name}/todos`);
     }
+
+    deleteTodo(name, id) {
+        //console.log('executed service')
+        return axios.delete(`http://localhost:8080/users/${name}/todos/${id}`);
+    }
+
 }
 
 export default new TodoDataService()
@@ -1177,22 +1201,44 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class TodoHardcodedService {
-	
+
 	private static List<Todo> todos = new ArrayList<>();
 	private static int idCounter = 0;
-	
+
 	static {
-		todos.add(new Todo(++idCounter, "in28minutes","Learn to Dance 2", new Date(), false ));
-		todos.add(new Todo(++idCounter, "in28minutes","Learn about Microservices 2", new Date(), false ));
-		todos.add(new Todo(++idCounter, "in28minutes","Learn about Angular", new Date(), false ));
+		todos.add(new Todo(++idCounter, "in28minutes", "Learn to Dance 2", new Date(), false));
+		todos.add(new Todo(++idCounter, "in28minutes", "Learn about Microservices 2", new Date(), false));
+		todos.add(new Todo(++idCounter, "in28minutes", "Learn about Angular", new Date(), false));
 	}
-	
+
 	public List<Todo> findAll() {
 		return todos;
-	}	
+	}
+
+	public Todo deleteById(long id) {
+		Todo todo = findById(id);
+
+		if (todo == null)
+			return null;
+
+		if (todos.remove(todo)) {
+			return todo;
+		}
+
+		return null;
+	}
+
+	public Todo findById(long id) {
+		for (Todo todo : todos) {
+			if (todo.getId() == id) {
+				return todo;
+			}
+		}
+
+		return null;
+	}
 }
 ```
 ---
@@ -1205,23 +1251,38 @@ package com.in28minutes.rest.webservices.restfulwebservices.todo;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class TodoResource {
-	
+
 	@Autowired
 	private TodoHardcodedService todoService;
-	
+
 	@GetMapping("/users/{username}/todos")
-	public List<Todo> getAllTodos(@PathVariable String username){
-		//Thread.sleep(3000);
+	public List<Todo> getAllTodos(@PathVariable String username) {
+		// Thread.sleep(3000);
 		return todoService.findAll();
-	}	
+	}
+
+	// DELETE /users/{username}/todos/{id}
+	@DeleteMapping("/users/{username}/todos/{id}")
+	public ResponseEntity<Void> deleteTodo(@PathVariable String username, @PathVariable long id) {
+
+		Todo todo = todoService.deleteById(id);
+
+		if (todo != null) {
+			return ResponseEntity.noContent().build();
+		}
+
+		return ResponseEntity.notFound().build();
+	}
 }
 ```
 ---
@@ -1288,6 +1349,29 @@ public class Todo {
 	public void setDone(boolean isDone) {
 		this.isDone = isDone;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Todo other = (Todo) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
 	
 }
 ```
