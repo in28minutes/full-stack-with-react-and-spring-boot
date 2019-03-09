@@ -56,8 +56,8 @@ class Counter extends Component {
 class CounterButton extends Component {
   //Define the initial state in a constructor
   //state => counter 0
-  constructor() {
-      super(); //Error 1
+  //constructor() {
+  //    super(); //Error 1
 
     //   this.state = {
     //       counter : 0
@@ -65,7 +65,7 @@ class CounterButton extends Component {
 
     //   this.increment = this.increment.bind(this);
     //   this.decrement = this.decrement.bind(this);
-  }
+  //}
   
   render()  {
   //render = () =>  {
