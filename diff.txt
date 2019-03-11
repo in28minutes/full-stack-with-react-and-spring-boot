@@ -1,11 +1,13 @@
-constants.js
+Virtual Dom to Real Dom - Reconciliation & React Terms - Declarative, Composition
 
-export const 
-
+constants.js export const 
 axios.defaults.baseURL = SERVER_API_URL;
-What is Bundling?
-npm build
+
+npm build => What is Bundling?
 Formatting Code
+Generic Error Handling
+- componentDidCatch
+- https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html
 
 User Context API
 
@@ -44,5 +46,54 @@ class UserContextProvider extends Component {
 static contextType = UserContext;
 
 <UserContextConsumer>
-            {(context) => (<div><p>{context.username}</p></div>)}
-          </UserContextConsumer>
+    {(context) => (<div><p>{context.username}</p></div>)}
+</UserContextConsumer>
+
+Async Code
+
+Promise
+.then
+.catch
+
+AuthenticationService
+	.executeJwtAuthenticationService(this.state.username, this.state.password)
+	.then((response) => {
+		AuthenticationService.registerSuccessfulLoginForJwt(this.state.username, response.data.token)
+		this.props.history.push(`/welcome/${this.state.username}`)
+	}).catch((error) => {
+		console.log(error)
+		this.setState({
+			showSuccessMessage: false
+		})
+		this.setState({
+			hasLoginFailed: true
+		})
+	})
+
+HelloWorldService.executeHelloWorldPathVariableService(this.props.match.params.name)
+	.then(response => this.handleSuccessfulResponse(response))
+	.catch(error => this.handleError(error))
+
+https://github.com/axios/axios#response-schema
+
+# https://github.com/axios/axios#interceptors
+axios.interceptors.request.use(
+            (config) => {
+                if(this.isUserLoggedIn()) {
+                    config.headers.authorization = token
+                }
+                return config
+            }
+        )
+
+# Use React Partially - Add React to HTML Page in One Minute
+Add React in One Minute
+- https://reactjs.org/docs/add-react-to-a-website.html
+
+# Redux
+https://redux.js.org/introduction/getting-started
+https://codesandbox.io/s/4z8x75qow9
+
+React - Designing Apps
+
+JS Syntax

@@ -1058,6 +1058,37 @@ create table todo (
 
 ```
 
+digraph architecture {
+node[style=filled,color="#59C8DE",fontsize=20]
+//node [style=filled,color="#D14D28", fontcolor=white];
+edge [fontsize=6 ];
+
+VIRTUALDOM[label=<Virtual DOM>];
+DOM
+REACTAPP[label=<App>];
+
+{rank=same; DOM, REACTAPP};
+
+VIRTUALDOM -> DOM [ label="diff & update" ];
+REACTAPP -> VIRTUALDOM [ label="creates" ];
+DOM -> REACTAPP [ label="events" ];
+
+}
+
+digraph architecture {
+node[style=filled,color="#59C8DE",fontsize=20]
+//node [style=filled,color="#D14D28", fontcolor=white];
+edge [fontsize=9 ];
+{rank=same; Actions, Reducers, Store};
+
+Actions -> Reducers
+View -> Actions [ label="dispatch" ];
+Store -> View [label ="subscribe"]
+Reducers -> Store
+
+}
+
+
   
 graph architecture {
 node[style=filled,color="#59C8DE"]
