@@ -1,0 +1,267 @@
+diff --git a/frontend/todo-app/src/api/todo/HelloWorldService.js b/frontend/todo-app/src/api/todo/HelloWorldService.js
+index 48b4f31..bbfe00a 100644
+--- a/frontend/todo-app/src/api/todo/HelloWorldService.js
++++ b/frontend/todo-app/src/api/todo/HelloWorldService.js
+@@ -1,20 +1,32 @@
+-import axios from 'axios'
++import axiosAuthorized from './AxiosAuthorized'
++
++// import axios from 'axios'
++
++// axios.interceptors.request.use(
++//     config => {
++//       config.headers.authorization =  'Basic ' + window.btoa('in28minutes' + ':' + 'dummy');
++//       return config;
++//     }
++//   )
+ 
+ class HelloWorldService {
+     
+     executeHelloWorldService() {
+         //console.log('executed service')
+-        return axios.get('http://localhost:8080/hello-world');        
++        return axiosAuthorized.get('http://localhost:8080/hello-world');        
+     }
+ 
+     executeHelloWorldBeanService() {
+         //console.log('executed service')
+-        return axios.get('http://localhost:8080/hello-world-bean');        
++        return axiosAuthorized.get('http://localhost:8080/hello-world-bean');        
+     }
+ 
+     executeHelloWorldPathVariableService(name) {
+         //console.log('executed service')
+-        return axios.get(`http://localhost:8080/hello-world/path-variable/${name}`);        
++        let basicAuthHeaderString = 'Basic ' + window.btoa('in28minutes' + ':' + 'dummy');
++        return axiosAuthorized.get(`http://localhost:8080/hello-world/path-variable/${name}`
++        //,{ headers: { authorization: basicAuthHeaderString } }
++        );        
+     }
+ }
+ 
+diff --git a/frontend/todo-app/src/api/todo/TodoDataService.js b/frontend/todo-app/src/api/todo/TodoDataService.js
+index 74b6739..f036186 100644
+--- a/frontend/todo-app/src/api/todo/TodoDataService.js
++++ b/frontend/todo-app/src/api/todo/TodoDataService.js
+@@ -1,6 +1,7 @@
+ import axios from 'axios'
+ 
+ class TodoDataService {
++
+     retrieveAllTodos(name) {
+         //console.log('executed service')
+         return axios.get(`http://localhost:8080/users/${name}/todos`);
+diff --git a/frontend/todo-app/src/components/todo/AuthenticationService.js b/frontend/todo-app/src/components/todo/AuthenticationService.js
+index 55bb4ff..a8487b9 100644
+--- a/frontend/todo-app/src/components/todo/AuthenticationService.js
++++ b/frontend/todo-app/src/components/todo/AuthenticationService.js
+@@ -1,8 +1,17 @@
++import axios from 'axios'
++
+ class AuthenticationService {
+ 
++    executeBasicAuthenticationService(username, password) {
++        let basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
++        return axios.get(`http://localhost:8080/basicauth`, { headers: { authorization: basicAuthHeaderString } });
++    }
++    
+     registerSuccessfulLogin(username,password){
+         console.log('registerSuccessfulLogin')
+         sessionStorage.setItem('authenticatedUser', username);
++        sessionStorage.setItem('token', 'Basic ' + window.btoa(username + ':' + password));
++        this.setupAxiosInterceptors();
+     }
+ 
+     logout() {
+@@ -20,6 +29,21 @@ class AuthenticationService {
+         if(user===null) return ''
+         return user
+     }
++
++    getAuthenticationToken() {
++        let user = sessionStorage.getItem('token')
++        if(user===null) return ''
++        return user
++    }
++
++    setupAxiosInterceptors() {
++        axios.interceptors.request.use(config => {
++            if (this.isUserLoggedIn()) {
++                config.headers.authorization = this.getAuthenticationToken();
++            }
++            return config;
++        })
++    }
+ }
+ 
+ export default new AuthenticationService()
+\ No newline at end of file
+diff --git a/frontend/todo-app/src/components/todo/LoginComponent.jsx b/frontend/todo-app/src/components/todo/LoginComponent.jsx
+index 1352032..9b3d571 100644
+--- a/frontend/todo-app/src/components/todo/LoginComponent.jsx
++++ b/frontend/todo-app/src/components/todo/LoginComponent.jsx
+@@ -45,16 +45,36 @@ class LoginComponent extends Component {
+ 
+     loginClicked() {
+         //in28minutes,dummy
+-        if(this.state.username==='in28minutes' && this.state.password==='dummy'){
+-            AuthenticationService.registerSuccessfulLogin(this.state.username,this.state.password)
+-            this.props.history.push(`/welcome/${this.state.username}`)
+-            //this.setState({showSuccessMessage:true})
+-            //this.setState({hasLoginFailed:false})
+-        }
+-        else {
+-            this.setState({showSuccessMessage:false})
+-            this.setState({hasLoginFailed:true})
+-        }
++        
++        // if(this.state.username==='in28minutes' && this.state.password==='dummy'){
++        //     AuthenticationService.registerSuccessfulLogin(this.state.username,this.state.password)
++        //     this.props.history.push(`/welcome/${this.state.username}`)
++        //     //this.setState({showSuccessMessage:true})
++        //     //this.setState({hasLoginFailed:false})
++        // }
++        // else {
++        //     this.setState({showSuccessMessage:false})
++        //     this.setState({hasLoginFailed:true})
++        // }
++
++        AuthenticationService.executeBasicAuthenticationService(this.state.username, this.state.password)
++         .then(
++             () => {
++                AuthenticationService.registerSuccessfulLogin(this.state.username,this.state.password)
++                this.props.history.push(`/welcome/${this.state.username}`)
++                //this.setState({showSuccessMessage:true})
++                //this.setState({hasLoginFailed:false})
++    
++             }
++         )
++         .catch(
++            () => {
++                this.setState({showSuccessMessage:false})
++                this.setState({hasLoginFailed:true})                     
++            }
++
++         )
++
+     }
+ 
+     render() {
+diff --git a/frontend/todo-app/src/components/todo/WelcomeComponent.jsx b/frontend/todo-app/src/components/todo/WelcomeComponent.jsx
+index 8a38b78..d595982 100644
+--- a/frontend/todo-app/src/components/todo/WelcomeComponent.jsx
++++ b/frontend/todo-app/src/components/todo/WelcomeComponent.jsx
+@@ -52,10 +52,15 @@ class WelcomeComponent extends Component {
+     }
+ 
+     handleError(error) {
+-        console.log(error.response)
+-        this.setState({welcomeMessage: error.response.data.message})
++        let welcomeMessage = ""
++        console.log(error)
++        if(error.message) 
++            welcomeMessage = welcomeMessage + error.message
++        if(error && error.response && error.response.data) {
++            welcomeMessage = welcomeMessage + error.response.data.message;
++        }
++        this.setState({welcomeMessage})
+     }
+-
+ }
+ 
+ 
+diff --git a/restful-web-services/pom.xml b/restful-web-services/pom.xml
+index f928221..98f8d55 100644
+--- a/restful-web-services/pom.xml
++++ b/restful-web-services/pom.xml
+@@ -38,6 +38,11 @@
+ 
+ 		<dependency>
+ 			<groupId>org.springframework.boot</groupId>
++			<artifactId>spring-boot-starter-security</artifactId>
++		</dependency>
++
++		<dependency>
++			<groupId>org.springframework.boot</groupId>
+ 			<artifactId>spring-boot-devtools</artifactId>
+ 			<scope>runtime</scope>
+ 		</dependency>
+diff --git a/restful-web-services/src/main/resources/application.properties b/restful-web-services/src/main/resources/application.properties
+index 5cbf315..435c2ac 100644
+--- a/restful-web-services/src/main/resources/application.properties
++++ b/restful-web-services/src/main/resources/application.properties
+@@ -1 +1,4 @@
+-logging.level.org.springframework = info
+\ No newline at end of file
++logging.level.org.springframework = info
++
++spring.security.user.name=in28minutes
++spring.security.user.password=dummy
+\ No newline at end of file
+
+
+package com.in28minutes.rest.webservices.restfulwebservices.basic.auth;
+public class AuthenticationBean {
+
+    private String message;
+
+    public AuthenticationBean(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("HelloWorldBean [message=%s]", message);
+    }
+
+}
+
+package com.in28minutes.rest.webservices.restfulwebservices.basic.auth;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+//Controller
+@CrossOrigin(origins="http://localhost:4200")
+@RestController
+public class BasicAuthenticationController {
+
+    @GetMapping(path = "/basicauth")
+    public AuthenticationBean helloWorldBean() {
+        //throw new RuntimeException("Some Error has Happened! Contact Support at ***-***");
+        return new AuthenticationBean("You are authenticated");
+    }   
+}
+
+package com.in28minutes.rest.webservices.restfulwebservices.basic.auth;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@Configuration
+@EnableWebSecurity
+public class SpringSecurityConfigurationBasicAuth extends WebSecurityConfigurerAdapter{
+    
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+        .csrf().disable()   
+        .authorizeRequests()
+        .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+            //.formLogin().and()
+            .httpBasic();
+    }
+}
+
