@@ -1,26 +1,27 @@
-React Templates Plugin
-setState is asynchronous - an example!
- - interchange Target Date and is Completed? - Start of Camtasia file 8
-
 Fix the List Todo Headers
 constants.js export const 
 axios.defaults.baseURL = SERVER_API_URL;
-Step 86 - Importing JWT Framework into Eclipse.mp4  => Change Git Repos
+DONE Step 86 - Importing JWT Framework into Eclipse.mp4  => Change Git Repos
 Step 87 - Quick Tip - Resolving JWT Compilation Errors.mp4 => Record Again
 Step 93 - Connecting GET REST APIs to JPA Repository.mp4 => Record Again
 Step 94 - Connecting POST, PUT and DELETE REST APIs to JPA Repository.mp4 => Record Again
 Step 00 - Getting Started with the Course => Record 
 Course Introduction Video  => Record 
 
-DONE - Virtual Dom to Real Dom - Reconciliation 
-
+React Templates Plugin
+setState is asynchronous - an example!
+ - interchange Target Date and is Completed? - Start of Camtasia file 8
 npm build => What is Bundling?
-
 Formatting Code => visual studio code settings windows
 
 Generic Error Handling
 - componentDidCatch
 - https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html
+
+React - Designing Apps
+JS Syntax
+
+Update HATEOAS for microservices course!
 
 User Context API
 
@@ -62,20 +63,15 @@ static contextType = UserContext;
     {(context) => (<div><p>{context.username}</p></div>)}
 </UserContextConsumer>
 
-# Use React Partially - Add React to HTML Page in One Minute
-Add React in One Minute
-- https://reactjs.org/docs/getting-started.html
-- https://reactjs.org/docs/add-react-to-a-website.html
 
 # Redux
 https://redux.js.org/introduction/getting-started
 https://codesandbox.io/s/4z8x75qow9
 
-React - Designing Apps
-
-JS Syntax
-
-Update HATEOAS for microservices course!
+# Use React Partially - Add React to HTML Page in One Minute
+Add React in One Minute
+- https://reactjs.org/docs/getting-started.html
+- https://reactjs.org/docs/add-react-to-a-website.html
 
 
 +/**
@@ -307,3 +303,23 @@ index 4f4f894..b6db735 100644
                                              <td><button className="btn btn-success" onClick={() => this.updateTodoClicked(todo.id)}>Update</button></td>
                                              <td><button className="btn btn-warning" onClick={() => this.deleteTodoClicked(todo.id)}>Delete</button></td>
                                          </tr>
+
+
+const mapStateToProps = (state) => {
+    return {
+        counter: state
+    }
+};
+  
+const mapDispatchToProps = dispatch => ({
+    increment: by => dispatch({ type: 'INCREMENT', by }),
+    decrement: by => dispatch({ type: 'DECREMENT', by }),
+    reset: by => dispatch({ type: 'RESET' }),
+});
+  
+export default connect(mapStateToProps, mapDispatchToProps)(Counter)
+
+// export default Counter
+
+        this.props.increment(by);
+        this.props.decrement(by);
