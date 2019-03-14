@@ -1227,6 +1227,12 @@ Forms[label=<Forms and Validation>]
   - For help : use our installation guide - https://www.youtube.com/playlist?list=PLBBog2r6uMCSmMVTW_QmDLyASBvovyAO3
 
 ## Next Steps
+- React
+  - Why we need to bind event handlers in Class Components in React?
+    - https://medium.freecodecamp.org/this-is-why-we-need-to-bind-event-handlers-in-class-components-in-react-f7ea1a6f93eb
+  - class vs className - A discussion
+    - https://stackoverflow.com/questions/46989454/class-vs-classname-in-react-16
+  - 
 - Modern JavaScript 
   - https://github.com/mbeaudru/modern-js-cheatsheet#tdz_sample
   - https://learnxinyminutes.com/docs/javascript/

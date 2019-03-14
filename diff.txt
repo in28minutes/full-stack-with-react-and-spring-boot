@@ -1,10 +1,23 @@
-Virtual Dom to Real Dom - Reconciliation & React Terms - Declarative, Composition
+React Templates Plugin
+setState is asynchronous - an example!
+ - interchange Target Date and is Completed? - Start of Camtasia file 8
 
+Fix the List Todo Headers
 constants.js export const 
 axios.defaults.baseURL = SERVER_API_URL;
+Step 86 - Importing JWT Framework into Eclipse.mp4  => Change Git Repos
+Step 87 - Quick Tip - Resolving JWT Compilation Errors.mp4 => Record Again
+Step 93 - Connecting GET REST APIs to JPA Repository.mp4 => Record Again
+Step 94 - Connecting POST, PUT and DELETE REST APIs to JPA Repository.mp4 => Record Again
+Step 00 - Getting Started with the Course => Record 
+Course Introduction Video  => Record 
+
+DONE - Virtual Dom to Real Dom - Reconciliation 
 
 npm build => What is Bundling?
-Formatting Code
+
+Formatting Code => visual studio code settings windows
+
 Generic Error Handling
 - componentDidCatch
 - https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html
@@ -49,45 +62,9 @@ static contextType = UserContext;
     {(context) => (<div><p>{context.username}</p></div>)}
 </UserContextConsumer>
 
-Async Code
-
-Promise
-.then
-.catch
-
-AuthenticationService
-	.executeJwtAuthenticationService(this.state.username, this.state.password)
-	.then((response) => {
-		AuthenticationService.registerSuccessfulLoginForJwt(this.state.username, response.data.token)
-		this.props.history.push(`/welcome/${this.state.username}`)
-	}).catch((error) => {
-		console.log(error)
-		this.setState({
-			showSuccessMessage: false
-		})
-		this.setState({
-			hasLoginFailed: true
-		})
-	})
-
-HelloWorldService.executeHelloWorldPathVariableService(this.props.match.params.name)
-	.then(response => this.handleSuccessfulResponse(response))
-	.catch(error => this.handleError(error))
-
-https://github.com/axios/axios#response-schema
-
-# https://github.com/axios/axios#interceptors
-axios.interceptors.request.use(
-            (config) => {
-                if(this.isUserLoggedIn()) {
-                    config.headers.authorization = token
-                }
-                return config
-            }
-        )
-
 # Use React Partially - Add React to HTML Page in One Minute
 Add React in One Minute
+- https://reactjs.org/docs/getting-started.html
 - https://reactjs.org/docs/add-react-to-a-website.html
 
 # Redux
@@ -97,3 +74,236 @@ https://codesandbox.io/s/4z8x75qow9
 React - Designing Apps
 
 JS Syntax
+
+Update HATEOAS for microservices course!
+
+
++/**
++ * This is a reducer, a pure function with (state, action) => state signature.
++ * It describes how an action transforms the state into the next state.
++ *
++ * The shape of the state is up to you: it can be a primitive, an array, an object,
++ * or even an Immutable.js data structure. The only important part is that you should
++ * not mutate the state object, but return a new object if the state changes.
++ *
++ * In this example, we use a `switch` statement and strings, but you can use a helper that
++ * follows a different convention (such as function maps) if it makes sense for your
++ * project.
++ */
++function counter(state = 0, action) {
++  switch (action.type) {
++    case 'INCREMENT':
++      return state + 1
++    case 'DECREMENT':
++      return state - 1
++    default:
++      return state
++  }
++}
++
++// Create a Redux store holding the state of your app.
++// Its API is { subscribe, dispatch, getState }.
++let store = createStore(counter)
++
++// You can use subscribe() to update the UI in response to state changes.
++// Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.
++// However it can also be handy to persist the current state in the localStorage.
++
++store.subscribe(() => console.log(store.getState()))
++
++// The only way to mutate the internal state is to dispatch an action.
++// The actions can be serialized, logged or stored and later replayed.
++store.dispatch({ type: 'INCREMENT' })
++// 1
++store.dispatch({ type: 'INCREMENT' })
++// 2
++store.dispatch({ type: 'DECREMENT' })
++// 1
+ 
+ class App extends Component {
+   render() {
+     return (
+-      <div className="App">
+-        {/*<Counter/>*/}
+-        <TodoApp />
+-      </div>
++      <Provider store={store}>
++        <UserContextProvider>
++          <div className="App">
++            <Counter />
++            {/*<TodoApp />*/}
++          </div>
++        </UserContextProvider>
++      </Provider>
+     );
+   }
+ }
+@@ -31,4 +80,30 @@ class App extends Component {
+ //   }
+ // }
+ 
++export const UserContext = React.createContext()
++
++export const UserContextConsumer = UserContext.Consumer
++
++export class UserContextProvider extends Component {
++
++  state = {
++    counter: 0,
++    incrementCounter: (by) => this.incrementCounter(by)
++  }
++
++  incrementCounter = (by) => {
++    this.setState({ counter: this.state.counter + by })
++  }
++
++  render() {
++    //console.log(this.props)
++    return (
++      <UserContext.Provider value={this.state}>
++        {this.props.children}
++      </UserContext.Provider>
++    )
++  }
++}
++
++
+ export default App;
+\ No newline at end of file
+diff --git a/frontend/todo-app/src/components/counter/Counter.css b/frontend/todo-app/src/components/counter/Counter.css
+index 3225523..4f3b58f 100644
+--- a/frontend/todo-app/src/components/counter/Counter.css
++++ b/frontend/todo-app/src/components/counter/Counter.css
+@@ -1,4 +1,4 @@
+-/*
++
+ button {
+     background-color: green;
+     font-size : 16px;
+@@ -17,6 +17,7 @@ button {
+     width : 200px;
+ }
+ 
++/*
+ body {
+     padding : 15px 30px;
+ }
+diff --git a/frontend/todo-app/src/components/counter/Counter.jsx b/frontend/todo-app/src/components/counter/Counter.jsx
+index 34a28ae..2c98db2 100644
+--- a/frontend/todo-app/src/components/counter/Counter.jsx
++++ b/frontend/todo-app/src/components/counter/Counter.jsx
+@@ -1,9 +1,12 @@
+ import React, { Component } from 'react'
+ import PropTypes from 'prop-types'
+ import './Counter.css'
++import { UserContextConsumer, UserContext } from '../../App'
+ 
+ class Counter extends Component {
+ 
++    static contextType = UserContext;
++
+     constructor() {
+ 
+         super(); //Error 1
+@@ -18,14 +21,20 @@ class Counter extends Component {
+     }
+ 
+     render() {
++        console.log('render called ' + this.context.counter)
++
+         return (
+-            <div className="counter">
+-                <CounterButton by={1} incrementMethod={this.increment} decrementMethod={this.decrement} />
+-                <CounterButton by={5} incrementMethod={this.increment} decrementMethod={this.decrement} />
+-                <CounterButton by={10} incrementMethod={this.increment} decrementMethod={this.decrement} />
+-                <span className="count">{this.state.counter}</span>
+-                <div><button className="reset" onClick={this.reset}>Reset</button></div>
+-            </div>
++            <UserContextConsumer>
++                {(context) => (
++                    <div className="counter">
++                        <CounterButton by={1} incrementMethod={this.increment} decrementMethod={this.decrement} />
++                        <CounterButton by={5} incrementMethod={this.increment} decrementMethod={this.decrement} />
++                        <CounterButton by={10} incrementMethod={this.increment} decrementMethod={this.decrement} />
++                        <span className="count">{context.counter}</span>
++                        <div><button className="reset" onClick={this.reset}>Reset</button></div>
++                    </div>
++                )}
++            </UserContextConsumer>
+         );
+     }
+ 
+@@ -35,11 +44,12 @@ class Counter extends Component {
+ 
+     increment(by) {
+         //console.log(`increment from child - ${by}`)
+-        this.setState(
+-            (prevState) => {
+-                return { counter: prevState.counter + by }
+-            }
+-        );
++        for (let i = 1; i <= 100; i++)
++            this.setState(
++                (prevState) => {
++                    return { counter: prevState.counter + by }
++                }
++            );
+     }
+ 
+     decrement(by) {
+@@ -67,16 +77,26 @@ class CounterButton extends Component {
+     //   this.decrement = this.decrement.bind(this);
+     //}
+ 
++    static contextType = UserContext;
++
+     render() {
++
++
+         //render = () =>  {
+         //const style = {fontSize : "50px", padding : "15px 30px"};
+         return (
+-            <div className="counter">
+-                <button onClick={() => this.props.incrementMethod(this.props.by)} >+{this.props.by}</button>
+-                <button onClick={() => this.props.decrementMethod(this.props.by)} >-{this.props.by}</button>
+-                {/*<span className="count" 
+-            >{this.state.counter}</span>*/}
+-            </div>
++            <UserContextConsumer>
++                {(context) => (
++                    <div className="counter">
++                        <button onClick={() => context.incrementCounter(this.props.by)} >+{this.props.by}</button>
++                        <button onClick={() => this.props.decrementMethod(this.props.by)} >-{this.props.by}</button>
++                        {context.counter}
++                        {/*<span className="count" 
++        >{this.state.counter}</span>*/}
++                    </div>
++
++                )}
++            </UserContextConsumer >
+         )
+     }
+ 
+@@ -107,4 +127,6 @@ CounterButton.propTypes = {
+     by: PropTypes.number
+ }
+ 
++
++
+ export default Counter
+\ No newline at end of file
+diff --git a/frontend/todo-app/src/components/todo/ListTodosComponent.jsx b/frontend/todo-app/src/components/todo/ListTodosComponent.jsx
+index 4f4f894..b6db735 100644
+--- a/frontend/todo-app/src/components/todo/ListTodosComponent.jsx
++++ b/frontend/todo-app/src/components/todo/ListTodosComponent.jsx
+@@ -101,8 +101,9 @@ class ListTodosComponent extends Component {
+                                     todo =>
+                                         <tr key={todo.id}>
+                                             <td>{todo.description}</td>
+-                                            <td>{todo.done.toString()}</td>
+                                             <td>{moment(todo.targetDate).format('YYYY-MM-DD')}</td>
++                                            <td>{todo.done.toString()}</td>
++
+                                             <td><button className="btn btn-success" onClick={() => this.updateTodoClicked(todo.id)}>Update</button></td>
+                                             <td><button className="btn btn-warning" onClick={() => this.deleteTodoClicked(todo.id)}>Delete</button></td>
+                                         </tr>
