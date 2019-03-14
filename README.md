@@ -104,119 +104,128 @@ You will be using React (Frontend View Framework), React Create App(To create Re
 
 ### Step Wise Details
 
-#### Quick Overview
+- 000 - Full Stack Application with React and Spring Boot - Introduction
+- 000 - Step 00 - Getting Started with the Course
 
-- Step 01 - Understanding Full Stack Application Architecture
-- Step 02 - Quick Overview of Modern JavaScript and TypeScript
-- Step 03 - Installing React CLI - Awesome Tool to create React Projects
-- Step 04 - Creating and Launching React Application with React CLI
-- Step 05 - Importing React App into Visual Studio Code
-- Step 06 - Exploring React CLI Commands - test, lint, e2e, serve, build
-- Step 07 - Exploring React CLI Project Structure
+#### Getting Started with React - Basics with Components 
+- 01 Step 01 - Understanding Full Stack Application Architecture
+- 01 Step 02 - Using Create React App to Create and Launch a React Application
+- 01 Step 03 - Importing React App into Visual Studio Code
+- 01 Step 04 - Exploring React Project Structure
+- 01 Step 05 - Introduction to React Components
+- 01 Step 06 - Playing with React Class Components
+- 01 Step 07 - Introduction to Function Components in React
+- 01 Step 08 - Exploring JSX Further - Babel and more
+- 01 Step 09 - Refactoring components to individual modules and Quick Review of JavaScript Modules
+- 01 Step 10 - Exercise - Creating seperate modules for other components
 
-#### Getting Hands on With React
+#### Next Steps with React - Building Counter Application
+- 02 Step 01 - Introduction to Section - Building Counter Application
+- 02 Step 02 - Creating Basic React Counter Component
+- 02 Step 03 - Adding a Button and a Counter to the React Counter Component
+- 02 Step 04 - Handling click event on the increment button
+- 02 Step 05 - Adding State to a React Counter Component
+- 02 Step 06 - Understanding React - Behind the scenes - Virtual Dom
+- 02 Step 07 - Understanding setState and Using Arrow Functions to avoid this binding
+- 02 Step 08 - Defining Inline Javascript CSS in JSX
+- 02 Step 09 - Defining Multiple Counter Buttons and Adding a Component Prop
+- 02 Step 10 - Understanding React Component Props - Default Value and Type Constraints
+- 02 Step 11 - Using React Developer Tools Chrome Plugin 
+- 02 Step 12 - Moving State Up - Refactoring to Counter and Counter Button Components
+- 02 Step 13 - Moving State Up - Adding state to Counter Component 
+- 02 Step 14 - Best Practice - Using Previous State in setState 
+- 02 Step 15 - Adding Decrement Buttons and Reset Button
+- 02 Step 16 - Quick Review of the Counter Example
 
-- Step 08 - Introduction to React Components - Basics
-- Step 09 - Introduction to React Components - Playing with AppComponent
-- Step 10 - Generating Welcome Component with ng generate
-- Step 11 - Language Variations With an Example - Java, JavaScript and TypeScript
-- Step 12 - Generating and Setting up Login Component
-- Step 13 - Understanding Event Binding - Adding click event on Login Page
-- Step 14 - Using ngModel with 2 Way Data Binding in Login Page
-- Step 15 - Quick Review of Data Binding Approaches
-- Step 16 - Adding Hardcoded Authentication to Logic Component - ngIf directive
-- Step 17 - Implementing Routes for Login, Welcome and Error Components
-- Step 18 - Implementing Routing from Login to Welcome Component
-- Step 19 - Adding Route Parameter for Welcome Component
-- Step 20 - Create List Todos Component with ng generate
-- Step 21 - Create a Link to Todos in Welcome Component
-- Step 22 - Best Practice - Create a Todo Class 
-- Step 23 - Quick Introduction to React Modules
-- Step 24 - Understanding Bootstrapping of React App with Root Module and Component
-- Step 25 - Quick Review - React Modules and Components
-- Step 26 - Overview of Next Few Steps - Bootstrap, Menu, Footer and Refactoring
-- Step 27 - Adding Bootstrap Framework and Creating Components for Menu and Footer
-- Step 28 - Using Bootstrap to Create a Menu with Navigation Links
-- Step 29 - Styling Footer and Other Components with CSS and Bootstrap
-- Step 30 - Good Practice - Use RouterLink instead of href for Routes
-- Step 31 - Creating an Independent Authentication Service Component
-- Step 32 - Using Session Storage to Store User Authentication Token
-- Step 33 - Enabling Menu Links Based on User Authentication Token
-- Step 34 - Implementing Logout to remove User Authentication Token
-- Step 35 - Securing Components using Route Guards - Part 1
-- Step 36 - Securing Components using Route Guards - Part 2
-- Step 37 - Quick Review - Authentication Service, Dependency Injection and Route Guards
+#### Combining Spring Boot and React to Build Full Stack Todo Management Application 
+- 03 Step 01 - Introduction to Todo Management App
+- 03 Step 02 - Getting Started with Login Component
+- 03 Step 03 - Understanding React Controlled Component - Adding State to Login Component
+- 03 Step 04 - Refactoring to Common Change Event for Multiple Form Elements
+- 03 Step 05 - Adding Hardcoded Authentication to Login Component
+- 03 Step 06 - Understanding Conditional Rendering with && in React JSX
+- 03 Step 07 - Implementing Routing for Login and Welcome Components with React Router
+- 03 Step 08 - Implementing Routing from Login to Welcome Component
+- 03 Step 09 - Adding an Error Component for Invalid URIs
+- 03 Step 10 - Adding Route Parameter for Welcome Component
+- 03 Step 11 - 01 - Creating a Basic React List Todo Component
+- 03 Step 11 - 02 - Adding a Link from Welcome to Todo Page and New Todo Attributes
+- 03 Step 12 - Adding Bootstrap Framework and Creating Components for Header and Footer
+- 03 Step 13 - Using Bootstrap to Create a Menu with Navigation Links
+- 03 Step 14 - Enhancing Footer and Creating Logout Component
+- 03 Step 15 - Styling Login, List Todo and Other Components with CSS and Bootstrap
+- 03 Step 16 - Using Session Storage to Store User Authentication Token
+- 03 Step 17 - Implementing Logout to remove User Authentication Token
+- 03 Step 18 - Enabling Menu Links Based on User Authentication Token
+- 03 Step 19 - Securing Components using Authenticated Route
+- 03 Step 20 - Refactoring React Components into JavaScript Modules
+- 03 Step 21 - Quick Review - Routes, Authenticated Route and Components
 
-#### Introduction to Web Services and REST
+#### Getting Started with Spring Boot REST API Services
+- 03 Step 22 -- What is a Web Service? 
+- 03 Step 23 -- Important How Questions related to Web Services
+- 03 Step 24 -- Web Services - Key Terminology 
+- 03 Step 25 -- Introduction to RESTful Web Services
+- 03 Step 26 -- Initializing a RESTful Services Project with Spring Boot
+- 03 Step 27 -- Creating a Spring Boot Hello World Service
+- 03 Step 28 -- Enhancing the Spring Boot Hello World Service to return a Bean
+- 03 Step 29 -- Quick Review of Spring Boot Auto Configuration and Dispatcher Servlet - What's happening in the background?
+- 03 Step 30 -- Enhancing the Hello World Service with a Path Variable
 
-- Step 41 - What is a Web Service?
-- Step 42 - Important How Questions related to Web Services
-- Step 43 - Web Services - Key Terminology
-- Step 44 - Introduction to RESTful Web Services
+#### Connecting Spring Boot REST API with React Frontend
+- 03 Step 31 - Connecting React with Restful API - 1 - Preparing Welcome Page
+- 03 Step 32 - Connecting React with Restful API - 2 - Understanding Axios HTTP Cleint Framework and Promises
+- 03 Step 33 - Connecting React with Restful API - 3 - Running React App on Port 4200
+- 03 Step 34 - Connecting React with Restful API - 4 - Adding Axios and Creating HelloWorldService
+- 03 Step 35 - Connecting React with Restful API - 5 - Allow Cross Origin Requests From Spring Boot
+- 03 Step 36 - Connecting React with Restful API - 6 - Quick Review
+- 03 Step 37 - Calling Hello World Bean JSON API from React Frontend
+- 03 Step 38 - Calling Hello World HTTP Service with Path Variables
+- 03 Step 39 - Handling API Error Responses in React Frontend
+- 03 Step 40 - Designing RESTful Services for Todo Resource
+- 03 Step 41 -- Creating Spring Boot REST API for retrieving Todo List
+- 03 Step 42 - Connecting React Frontend with Todo List RESTful Service
+- 03 Step 43 - Understanding Important React Lifecycle Methods
+- 03 Step 44 -- Creating Spring Boot REST API to delete a Todo - 1 - Create DELETE Request Method
+- 03 Step 45 -- Creating Spring Boot REST API to delete a Todo - Execute DELETE Request Method
+- 03 Step 46 - Adding Delete Todo Feature to React Frontend
+- 03 Step 47 - Creating Todo Component and Handle Routing
+- 03 Step 48 - Designing Todo Form with moment, Formik and Bootstrap
+- 03 Step 49 - Initializing and Handling Form Submit with Formik
+- 03 Step 50 - Implementing Form Validation with Formik
+- 03 Step 51 - Creating Retrieve Todo Spring Boot API and Connecting React
+- 03 Step 52 -- Creating Spring Boot REST API for Updating Todo - PUT Request Method
+- 03 Step 53 -- Creating Spring Boot REST API for Creating a Todo - POST Request Method
+- 03 Step 54 -- RESTful Web Services - Best Practices
+- 03 Step 55 - Implementing Update Todo Feature in React Frontend
+- 03 Step 56 - Implementing New Todo Feature in React Frontend
 
-#### Getting Up and Running with REST and Spring Boot
+#### Getting Started with Spring Security and Basic Auth
+- 03 Step 57 -- Overview of Security with Basic Auth and JWT
+- 03 Step 58 -- Setting up Spring Security
+- 03 Step 59 -- Configure standard userid and password
+- 03 Step 60 - Enhancing React Welcome Data Service to use Basic Auth
+- 03 Step 61 -- Configure Spring Security to disable CSRF and enable OPTION Requests
+- 03 Step 62 - Creating React Axios Interceptor to add Basic Auth Header
+- 03 Step 63 - Remove Hard Coding of User Credentials
+- 03 Step 64 -- Create Basic Authentication RESTful Service in Spring Boot
+- 03 Step 65 - Enhance React Frontend to use Basic Auth API to Validate Login Credentials
 
-- Step 45 - Initializing a RESTful Services Project with Spring Boot
-- Step 46 - Creating a Hello World Service
-- Step 47 - Enhancing the Hello World Service to return a Bean
-- Step 48 - Quick Review of Spring Boot Auto Configuration and Dispatcher Servlet - What's happening in the background?
-- Step 49 - Enhancing the Hello World Service with a Path Variable
+#### Getting Started with JWT
+- 03 Step 66 -- Introduction to JWT
+- 03 Step 67 - Importing JWT Framework into Eclipse
+- 03 Step 68 - Quick Tip - Resolving JWT Compilation Errors
+- 03 Step 69 -- Executing JWT Resources - Get Token and Refresh Token
+- 03 Step 70 -- Understanding JWT Spring Security Framework Setup
+- 03 Step 71 -- Creating a New User with Encoded Password
+- 03 Step 72 - Using JWT Token in React Frontend
+- 03 Step 73 - Best Practice - Use Constants for URLs and Tokens
 
-#### Connecting React Frontend to Spring Boot Restful Services
-
-- Step 50 - Connecting React Frontend with Restful API - 1 - Creating Data Service
-- Step 51 - Connecting React Frontend with Restful API - 2 - HttpClientModule and HttpClient
-- Step 52 - Connecting React Frontend with Restful API - 3 - Understanding Observable
-- Step 53 - Connecting React Frontend with Restful API - 4 - Understanding Subscribe
-- Step 54 - Connecting React Frontend with Restful API - 5 - Handling Error Responses
-- Step 55 - Calling Welcome HTTP Service with Path Variables
-- Step 56 - Designing RESTful Services for Todo Resource
-- Step 57 - Creating REST API for retrieving Todo List
-- Step 58 - Connecting React Frontend with Todo List RESTful Service
-- Step 59 - Creating REST API to delete a Todo - DELETE Request Method
-- Step 60 - Adding Delete Todo Feature to React Frontend
-- Step 61 - Creating Todo Component and Handle Routing
-- Step 62 - Designing Todo Page with Bootstrap Framework
-- Step 63 - Creating Retrieve Tod0 Service and Connect React Frontend
-- Step 64 - Improve Todo Page Appearance
-- Step 65 - Creating REST API for Updating Todo - PUT Request Method
-- Step 66 - Creating REST API for Creating a Todo - POST Request Method
-- Step 67 - Implementing Update Todo Feature in React Frontend
-- Step 68 - Implementing New Todo Feature in React Frontend
-- Step 69 - Improving Todo Form - Validation and Form Submit on Enter - ngSubmit
-- Step 70 - Enhancing Validation Messages on Todo Page
-
-#### Implementing Spring Security with Basic Authentication
-
-- Step 71 - Overview of Security with Basic Auth and JWT
-- Step 72 - Setting up Spring Security
-- Step 73 - Configure standard userid and password
-- Step 74 - Enhancing React Welcome Data Service to use Basic Auth
-- Step 75 - Configure Spring Security to disable CSRF and enable OPTION Requests
-- Step 76 - Creating React HttpInterceptor to add Basic Auth Header
-- Step 77 - Configure HttpInterceptor as Provider in App Module
-- Step 78 - Create Basic Authentication RESTful Service in Spring Boot
-- Step 79 - Create React Basic Authentication Service
-- Step 80 - Connect Login Page to Basic Authentication Service - Part 1
-- Step 81 - Connect Login Page to Basic Authentication Service - Part 2
-- Step 82 - Refactoring React Basic Authentication Service
-- Step 83 - Refactoring HttpInterceptor to use Basic Authentication Token
-- Step 84 - Best Practice - Use Constants for URLs and Tokens
-
-#### Connecting Spring Security with JWT
-- Step 85 - Introduction to JWT
-- Step 86 - Importing JWT Framework into Eclipse
-- Step 87 - Quick Tip - Resolving JWT Compilation Errors
-- Step 88 - Executing JWT Resources - Get Token and Refresh Token
-- Step 89 - Understanding JWT Spring Security Framework Setup
-- Step 90 - Creating a New User with Encoded Password
-- Step 91 - Using JWT Token in React Frontend
-
-#### Connecting REST API With JPA and Hibernate
-
-- Step 92 - Setting up Todo Entity and Populating Data
-- Step 93 - Connecting GET REST APIs to JPA Repository
-- Step 94 - Connecting POST, PUT and DELETE REST APIs to JPA Repository
+#### Integrating with the Backend using JPA and Hibernate
+- 03 Step 74 -- Setting up Todo Entity and Populating Data
+- 03 Step 75 - Connecting React with GET REST APIs connected to JPA Repository
+- 03 Step 76 - Connecting POST, PUT and DELETE REST APIs to JPA Repository
+- 03 Step 77 - Connecting React Frontend with JPA POST, PUT and DELETE REST APIs
 
 #### Spring Boot in 10 Steps
 

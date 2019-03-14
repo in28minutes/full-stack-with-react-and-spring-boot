@@ -1,29 +1,32 @@
-Fix the List Todo Headers
-constants.js export const 
-axios.defaults.baseURL = SERVER_API_URL;
+DONE Fix the List Todo Headers
+DONE constants.js export const 
+DONE axios.defaults.baseURL = SERVER_API_URL;
 
 DONE Step 86 - Importing JWT Framework into Eclipse.mp4  => Change Git Repos
 DONE Step 87 - Quick Tip - Resolving JWT Compilation Errors.mp4 => Record Again
 
-Step 93 - Connecting GET REST APIs to JPA Repository.mp4 => Record Again
-Step 94 - Connecting POST, PUT and DELETE REST APIs to JPA Repository.mp4 => Record Again
-Step 00 - Getting Started with the Course => Record 
-Course Introduction Video  => Record 
+DONE Step 93 - Connecting GET REST APIs to JPA Repository.mp4 => Record Again
+DONE Step 94 - Connecting POST, PUT and DELETE REST APIs to JPA Repository.mp4 => Record Again
 
-React Templates Plugin
-setState is asynchronous - an example!
- - interchange Target Date and is Completed? - Start of Camtasia file 8
-npm build => What is Bundling?
-Formatting Code => visual studio code settings windows
+DONE Step 00 - Getting Started with the Course => Record 
+DONE Course Introduction Video  => Record 
+
+NOT DOING - setState is asynchronous - an example!
+DONE - npm build => What is Bundling?
+DONE - React Templates Plugin
+React - Designing Apps
+DONE Formatting Code => visual studio code settings windows
+
+LATER 
+~~~~~~
 
 Generic Error Handling
 - componentDidCatch
 - https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html
 
-React - Designing Apps
 JS Syntax
-
 Update HATEOAS for microservices course!
+
 
 User Context API
 
