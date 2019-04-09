@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import AuthenticationService from './AuthenticationService.js'
 
 
@@ -26,4 +26,4 @@ class HeaderComponent extends Component {
     }
 }
 
-export default HeaderComponent
+export default withRouter(HeaderComponent);
