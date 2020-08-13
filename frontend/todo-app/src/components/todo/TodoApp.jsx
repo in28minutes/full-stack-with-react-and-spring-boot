@@ -15,7 +15,6 @@ class TodoApp extends Component {
         return (
             <div className="TodoApp">
                 <Router>
-                    <>
                         <HeaderComponent/>
                         <Switch>
                             <Route path="/" exact component={LoginComponent}/>
