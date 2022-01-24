@@ -555,7 +555,7 @@ const ListTodosComponentWithNavigation = withNavigation(ListTodosComponent)
 
 ```
 
-##### Change 1: ListTodosComponent - Use this.props.navigate
+##### Change 2: ListTodosComponent - Use this.props.navigate
 
 ```
 updateTodoClicked(id) {
@@ -563,11 +563,7 @@ updateTodoClicked(id) {
     //this.props.history.push(`/todos/${id}`)
 ```
 
-## Display Todo Details in TodoComponent
-
-#### Change Overview
-
-##### Change 1: TodoComponent - Enable Params and Navigation
+##### Change 3: TodoComponent - Enable Params and Navigation
 
 ```
 class TodoApp extends Component {
@@ -584,7 +580,7 @@ const TodoComponentWithParamsAndNavigation = withParams(withNavigation(TodoCompo
 
 ```
 
-##### Change 2: TodoComponent constructor - Use this.props.params
+##### Change 4: TodoComponent constructor - Use this.props.params
 
 ```
 class TodoComponent extends Component {
@@ -596,7 +592,7 @@ class TodoComponent extends Component {
             //id: this.props.match.params.id,
 ```
 
-##### Change 3: TodoComponent onSubmit - Use this.props.navigate
+##### Change 5: TodoComponent onSubmit - Use this.props.navigate
 ```
 onSubmit(values) {
 
