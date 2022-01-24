@@ -5,614 +5,6 @@ Current Directory : /Ranga/git/00.articles-and-other-repos/react-23jan2022/todo-
 ## Complete Code Example
 
 
-### /public/index.html
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
-</html>
-```
----
-
-### /public/manifest.json
-
-```json
-{
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
-}
-```
----
-
-### /public/robots.txt
-
-```
-# https://www.robotstxt.org/robotstxt.html
-User-agent: *
-Disallow:
-```
----
-
-### /src/App.css
-
-```css
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 40px;
-  background-color: #222222;
-}
-
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-```
----
-
-### /src/App.js
-
-```js
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Counter from './components/counter/Counter.jsx'
-import TodoApp from './components/todo/TodoApp'
-import './bootstrap.css'
-
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-         {/*<Counter/>*/}
-         <TodoApp/>
-      </div>
-    );
-  }
-}
-
-class FirstComponent extends Component {
-  render() {
-    return (
-      <div className="FirstComponent">
-        FirstComponent
-      </div>
-    );
-  }
-}
-
-class SecondComponent extends Component {
-  render() {
-    return (
-      <div className="SecondComponent">
-        SecondComponent
-      </div>
-    );
-  }
-}
-
-function ThirdComponent() {
-  return (
-    <div className="thirdComponent">
-       Third Component
-    </div>
-  )
-}
-export default App;
-```
----
-
-### /src/App.test.js
-
-```js
-import { render, screen } from '@testing-library/react';
-import App from './App';
-
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
-```
----
-
-### /src/Constants.js
-
-```js
-export const API_URL = 'http://localhost:8080'
-export const JPA_API_URL = 'http://localhost:8080/jpa'
-```
----
-
-### /src/api/todo/HelloWorldService.js
-
-```js
-import axios from 'axios'
-
-class HelloWorldService {
-
-    executeHelloWorldService() {
-        //console.log('executed service')
-        return axios.get('http://localhost:8080/hello-world');
-    }
-
-    executeHelloWorldBeanService() {
-        //console.log('executed service')
-        return axios.get('http://localhost:8080/hello-world-bean');
-    }
-
-    executeHelloWorldPathVariableService(name) {
-        //console.log('executed service')
-        // let username = 'in28minutes'
-        // let password = 'dummy'
-
-        // let basicAuthHeader = 'Basic ' +  window.btoa(username + ":" + password)
-
-        return axios.get(`http://localhost:8080/hello-world/path-variable/${name}`
-            // , 
-            //     {
-            //         headers : {
-            //             authorization: basicAuthHeader
-            //         }
-            //     }
-        );
-    }
-
-}
-
-export default new HelloWorldService()
-```
----
-
-### /src/api/todo/TodoDataService.js
-
-```js
-import axios from 'axios'
-import { API_URL, JPA_API_URL } from '../../Constants'
-
-class TodoDataService {
-
-    retrieveAllTodos(name) {
-        //console.log('executed service')
-        return axios.get(`${JPA_API_URL}/users/${name}/todos`);
-    }
-
-    retrieveTodo(name, id) {
-        //console.log('executed service')
-        return axios.get(`${JPA_API_URL}/users/${name}/todos/${id}`);
-    }
-
-    deleteTodo(name, id) {
-        //console.log('executed service')
-        return axios.delete(`${JPA_API_URL}/users/${name}/todos/${id}`);
-    }
-
-    updateTodo(name, id, todo) {
-        //console.log('executed service')
-        return axios.put(`${JPA_API_URL}/users/${name}/todos/${id}`, todo);
-    }
-
-    createTodo(name, todo) {
-        //console.log('executed service')
-        return axios.post(`${JPA_API_URL}/users/${name}/todos/`, todo);
-    }
-
-}
-
-export default new TodoDataService()
-```
----
-
-### /src/bootstrap.css
-
-```css
-@import url(https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css);
-```
----
-
-### /src/components/counter/Counter.css
-
-```css
-button {
-    background-color: green;
-    font-size : 16px;
-    padding : 15px 30px;
-    color : white;
-    width : 100px;
-}
-
-.count {
-    font-size : 50px;
-    padding : 15px 30px;
-}
-
-.reset {
-    background-color: red;
-    width : 200px;
-}
-
-body {
-    padding : 15px 30px;
-}
-```
----
-
-### /src/components/counter/Counter.jsx
-
-```
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import './Counter.css'
-
-class Counter extends Component {
-
-    constructor() {
-
-        super(); //Error 1
-  
-        this.state = {
-            counter : 0
-        }
-
-        this.increment = this.increment.bind(this);
-        this.decrement = this.decrement.bind(this);
-        this.reset = this.reset.bind(this);
-    }
-  
-    render() {
-        return (
-          <div className="counter">
-             <CounterButton by={1} incrementMethod={this.increment} decrementMethod={this.decrement}/>
-             <CounterButton by={5} incrementMethod={this.increment}  decrementMethod={this.decrement}/>
-             <CounterButton by={10} incrementMethod={this.increment}  decrementMethod={this.decrement}/>
-             <span className="count">{this.state.counter}</span> 
-             <div><button className="reset" onClick={this.reset}>Reset</button></div>
-          </div>
-        );
-    }    
-
-    reset() {
-        this.setState( {counter: 0});
-    }
-
-    increment(by) { 
-        //console.log(`increment from child - ${by}`)
-        this.setState(
-            (prevState) => {
-             return {counter: prevState.counter + by}
-            }
-        );
-    }
-
-    decrement(by) { 
-        //console.log(`increment from child - ${by}`)
-        this.setState(
-            (prevState) => {
-             return {counter: prevState.counter - by}
-            }
-        );
-    }
-
-}
-
-class CounterButton extends Component {
-  //Define the initial state in a constructor
-  //state => counter 0
-  constructor() {
-      super(); //Error 1
-
-    //   this.state = {
-    //       counter : 0
-    //   }
-
-    //   this.increment = this.increment.bind(this);
-    //   this.decrement = this.decrement.bind(this);
-  }
-  
-  render()  {
-  //render = () =>  {
-    //const style = {fontSize : "50px", padding : "15px 30px"};
-    return (
-        <div className="counter">
-            <button onClick={() => this.props.incrementMethod(this.props.by)} >+{this.props.by}</button>
-            <button onClick={() => this.props.decrementMethod(this.props.by)} >-{this.props.by}</button>
-            {/*<span className="count" 
-            >{this.state.counter}</span>*/}
-        </div>
-    )
-  }
-  
-//   increment() { //Update state - counter++
-//     //console.log('increment');
-//     //this.state.counter++; //Bad Practice
-//     this.setState({
-//         counter: this.state.counter + this.props.by
-//     });
-    
-//     this.props.incrementMethod(this.props.by);
-//   }
-
-//   decrement () {
-//     this.setState({
-//         counter: this.state.counter - this.props.by
-//     });
-    
-//     this.props.decrementMethod(this.props.by);
-//   }
-}
-
-CounterButton.defaultProps = {
-    by : 1
-}
-
-CounterButton.propTypes = {
-    by : PropTypes.number
-}
-
-export default Counter
-```
----
-
-### /src/components/todo/AuthenticatedRoute.jsx
-
-```
-import React, { Component } from 'react'
-import { Navigate } from 'react-router-dom'
-import AuthenticationService from './AuthenticationService.js'
-
-class AuthenticatedRoute extends Component {
-	render() {
-		if (AuthenticationService.isUserLoggedIn()) {
-			return {...this.props.children}
-		} else {
-			return <Navigate to="/login" />
-		}
-	}
-}
-
-export default AuthenticatedRoute
-```
----
-
-### /src/components/todo/AuthenticationService.js
-
-```js
-import axios from 'axios'
-import { API_URL } from '../../Constants'
-
-export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
-
-class AuthenticationService {
-
-    executeBasicAuthenticationService(username, password) {
-        return axios.get(`${API_URL}/basicauth`,
-            { headers: { authorization: this.createBasicAuthToken(username, password) } })
-    }
-
-    executeJwtAuthenticationService(username, password) {
-        return axios.post(`${API_URL}/authenticate`, {
-            username,
-            password
-        })
-    }
-
-    createBasicAuthToken(username, password) {
-        return 'Basic ' + window.btoa(username + ":" + password)
-    }
-
-    registerSuccessfulLogin(username, password) {
-        //let basicAuthHeader = 'Basic ' +  window.btoa(username + ":" + password)
-        //console.log('registerSuccessfulLogin')
-        sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username)
-        this.setupAxiosInterceptors(this.createBasicAuthToken(username, password))
-    }
-
-    registerSuccessfulLoginForJwt(username, token) {
-        sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username)
-        this.setupAxiosInterceptors(this.createJWTToken(token))
-    }
-
-    createJWTToken(token) {
-        return 'Bearer ' + token
-    }
-
-
-    logout() {
-        sessionStorage.removeItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
-    }
-
-    isUserLoggedIn() {
-        let user = sessionStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME)
-        if (user === null) return false
-        return true
-    }
-
-    getLoggedInUserName() {
-        let user = sessionStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME)
-        if (user === null) return ''
-        return user
-    }
-
-    setupAxiosInterceptors(token) {
-
-        axios.interceptors.request.use(
-            (config) => {
-                if (this.isUserLoggedIn()) {
-                    config.headers.authorization = token
-                }
-                return config
-            }
-        )
-    }
-}
-
-export default new AuthenticationService()
-```
----
-
-### /src/components/todo/ErrorComponent.jsx
-
-```
-import React from 'react'
-
-function ErrorComponent() {
-    return <div>An Error Occurred. I don't know what to do! Contact support at abcd-efgh-ijkl</div>
-}
-
-export default ErrorComponent
-```
----
-
-### /src/components/todo/FooterComponent.jsx
-
-```
-import React, {Component} from 'react'
-
-class FooterComponent extends Component {
-    render() {
-        return (
-            <footer className="footer">
-                <span className="text-muted">All Rights Reserved 2022 @in28minutes</span>
-            </footer>
-        )
-    }
-}
-
-export default FooterComponent
-```
----
-
-### /src/components/todo/HeaderComponent.jsx
-
-```
-import React, {Component} from 'react'
-
-import { Link } from 'react-router-dom'
-
-import AuthenticationService from './AuthenticationService.js'
-
-class HeaderComponent extends Component {
-    render() {
-        const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
-        //console.log(isUserLoggedIn);
-
-        return (
-            <header>
-                <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-                    <div><a href="http://www.in28minutes.com" className="navbar-brand">in28Minutes</a></div>
-                    <ul className="navbar-nav">
-                        {isUserLoggedIn && <li><Link className="nav-link" to="/welcome/in28minutes">Home</Link></li>}
-                        {isUserLoggedIn && <li><Link className="nav-link" to="/todos">Todos</Link></li>}
-                    </ul>
-                    <ul className="navbar-nav navbar-collapse justify-content-end">
-                        {!isUserLoggedIn && <li><Link className="nav-link" to="/login">Login</Link></li>}
-                        {isUserLoggedIn && <li><Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Logout</Link></li>}
-                    </ul>
-                </nav>
-            </header>
-        )
-    }
-}
-
-export default HeaderComponent
-```
----
 
 ### /src/components/todo/ListTodosComponent.jsx
 
@@ -1251,5 +643,614 @@ import '@testing-library/jest-dom';
     ]
   }
 }
+```
+---
+
+### /public/index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
+```
+---
+
+### /public/manifest.json
+
+```json
+{
+  "short_name": "React App",
+  "name": "Create React App Sample",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
+```
+---
+
+### /public/robots.txt
+
+```
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow:
+```
+---
+
+### /src/App.css
+
+```css
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #222222;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+```
+---
+
+### /src/App.js
+
+```js
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import Counter from './components/counter/Counter.jsx'
+import TodoApp from './components/todo/TodoApp'
+import './bootstrap.css'
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+         {/*<Counter/>*/}
+         <TodoApp/>
+      </div>
+    );
+  }
+}
+
+class FirstComponent extends Component {
+  render() {
+    return (
+      <div className="FirstComponent">
+        FirstComponent
+      </div>
+    );
+  }
+}
+
+class SecondComponent extends Component {
+  render() {
+    return (
+      <div className="SecondComponent">
+        SecondComponent
+      </div>
+    );
+  }
+}
+
+function ThirdComponent() {
+  return (
+    <div className="thirdComponent">
+       Third Component
+    </div>
+  )
+}
+export default App;
+```
+---
+
+### /src/App.test.js
+
+```js
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+test('renders learn react link', () => {
+  render(<App />);
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
+});
+```
+---
+
+### /src/Constants.js
+
+```js
+export const API_URL = 'http://localhost:8080'
+export const JPA_API_URL = 'http://localhost:8080/jpa'
+```
+---
+
+### /src/api/todo/HelloWorldService.js
+
+```js
+import axios from 'axios'
+
+class HelloWorldService {
+
+    executeHelloWorldService() {
+        //console.log('executed service')
+        return axios.get('http://localhost:8080/hello-world');
+    }
+
+    executeHelloWorldBeanService() {
+        //console.log('executed service')
+        return axios.get('http://localhost:8080/hello-world-bean');
+    }
+
+    executeHelloWorldPathVariableService(name) {
+        //console.log('executed service')
+        // let username = 'in28minutes'
+        // let password = 'dummy'
+
+        // let basicAuthHeader = 'Basic ' +  window.btoa(username + ":" + password)
+
+        return axios.get(`http://localhost:8080/hello-world/path-variable/${name}`
+            // , 
+            //     {
+            //         headers : {
+            //             authorization: basicAuthHeader
+            //         }
+            //     }
+        );
+    }
+
+}
+
+export default new HelloWorldService()
+```
+---
+
+### /src/api/todo/TodoDataService.js
+
+```js
+import axios from 'axios'
+import { API_URL, JPA_API_URL } from '../../Constants'
+
+class TodoDataService {
+
+    retrieveAllTodos(name) {
+        //console.log('executed service')
+        return axios.get(`${JPA_API_URL}/users/${name}/todos`);
+    }
+
+    retrieveTodo(name, id) {
+        //console.log('executed service')
+        return axios.get(`${JPA_API_URL}/users/${name}/todos/${id}`);
+    }
+
+    deleteTodo(name, id) {
+        //console.log('executed service')
+        return axios.delete(`${JPA_API_URL}/users/${name}/todos/${id}`);
+    }
+
+    updateTodo(name, id, todo) {
+        //console.log('executed service')
+        return axios.put(`${JPA_API_URL}/users/${name}/todos/${id}`, todo);
+    }
+
+    createTodo(name, todo) {
+        //console.log('executed service')
+        return axios.post(`${JPA_API_URL}/users/${name}/todos/`, todo);
+    }
+
+}
+
+export default new TodoDataService()
+```
+---
+
+### /src/bootstrap.css
+
+```css
+@import url(https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css);
+```
+---
+
+### /src/components/counter/Counter.css
+
+```css
+button {
+    background-color: green;
+    font-size : 16px;
+    padding : 15px 30px;
+    color : white;
+    width : 100px;
+}
+
+.count {
+    font-size : 50px;
+    padding : 15px 30px;
+}
+
+.reset {
+    background-color: red;
+    width : 200px;
+}
+
+body {
+    padding : 15px 30px;
+}
+```
+---
+
+### /src/components/counter/Counter.jsx
+
+```
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import './Counter.css'
+
+class Counter extends Component {
+
+    constructor() {
+
+        super(); //Error 1
+  
+        this.state = {
+            counter : 0
+        }
+
+        this.increment = this.increment.bind(this);
+        this.decrement = this.decrement.bind(this);
+        this.reset = this.reset.bind(this);
+    }
+  
+    render() {
+        return (
+          <div className="counter">
+             <CounterButton by={1} incrementMethod={this.increment} decrementMethod={this.decrement}/>
+             <CounterButton by={5} incrementMethod={this.increment}  decrementMethod={this.decrement}/>
+             <CounterButton by={10} incrementMethod={this.increment}  decrementMethod={this.decrement}/>
+             <span className="count">{this.state.counter}</span> 
+             <div><button className="reset" onClick={this.reset}>Reset</button></div>
+          </div>
+        );
+    }    
+
+    reset() {
+        this.setState( {counter: 0});
+    }
+
+    increment(by) { 
+        //console.log(`increment from child - ${by}`)
+        this.setState(
+            (prevState) => {
+             return {counter: prevState.counter + by}
+            }
+        );
+    }
+
+    decrement(by) { 
+        //console.log(`increment from child - ${by}`)
+        this.setState(
+            (prevState) => {
+             return {counter: prevState.counter - by}
+            }
+        );
+    }
+
+}
+
+class CounterButton extends Component {
+  //Define the initial state in a constructor
+  //state => counter 0
+  constructor() {
+      super(); //Error 1
+
+    //   this.state = {
+    //       counter : 0
+    //   }
+
+    //   this.increment = this.increment.bind(this);
+    //   this.decrement = this.decrement.bind(this);
+  }
+  
+  render()  {
+  //render = () =>  {
+    //const style = {fontSize : "50px", padding : "15px 30px"};
+    return (
+        <div className="counter">
+            <button onClick={() => this.props.incrementMethod(this.props.by)} >+{this.props.by}</button>
+            <button onClick={() => this.props.decrementMethod(this.props.by)} >-{this.props.by}</button>
+            {/*<span className="count" 
+            >{this.state.counter}</span>*/}
+        </div>
+    )
+  }
+  
+//   increment() { //Update state - counter++
+//     //console.log('increment');
+//     //this.state.counter++; //Bad Practice
+//     this.setState({
+//         counter: this.state.counter + this.props.by
+//     });
+    
+//     this.props.incrementMethod(this.props.by);
+//   }
+
+//   decrement () {
+//     this.setState({
+//         counter: this.state.counter - this.props.by
+//     });
+    
+//     this.props.decrementMethod(this.props.by);
+//   }
+}
+
+CounterButton.defaultProps = {
+    by : 1
+}
+
+CounterButton.propTypes = {
+    by : PropTypes.number
+}
+
+export default Counter
+```
+---
+
+### /src/components/todo/AuthenticatedRoute.jsx
+
+```
+import React, { Component } from 'react'
+import { Navigate } from 'react-router-dom'
+import AuthenticationService from './AuthenticationService.js'
+
+class AuthenticatedRoute extends Component {
+  render() {
+    if (AuthenticationService.isUserLoggedIn()) {
+      return {...this.props.children}
+    } else {
+      return <Navigate to="/login" />
+    }
+  }
+}
+
+export default AuthenticatedRoute
+```
+---
+
+### /src/components/todo/AuthenticationService.js
+
+```js
+import axios from 'axios'
+import { API_URL } from '../../Constants'
+
+export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
+
+class AuthenticationService {
+
+    executeBasicAuthenticationService(username, password) {
+        return axios.get(`${API_URL}/basicauth`,
+            { headers: { authorization: this.createBasicAuthToken(username, password) } })
+    }
+
+    executeJwtAuthenticationService(username, password) {
+        return axios.post(`${API_URL}/authenticate`, {
+            username,
+            password
+        })
+    }
+
+    createBasicAuthToken(username, password) {
+        return 'Basic ' + window.btoa(username + ":" + password)
+    }
+
+    registerSuccessfulLogin(username, password) {
+        //let basicAuthHeader = 'Basic ' +  window.btoa(username + ":" + password)
+        //console.log('registerSuccessfulLogin')
+        sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username)
+        this.setupAxiosInterceptors(this.createBasicAuthToken(username, password))
+    }
+
+    registerSuccessfulLoginForJwt(username, token) {
+        sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username)
+        this.setupAxiosInterceptors(this.createJWTToken(token))
+    }
+
+    createJWTToken(token) {
+        return 'Bearer ' + token
+    }
+
+
+    logout() {
+        sessionStorage.removeItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
+    }
+
+    isUserLoggedIn() {
+        let user = sessionStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME)
+        if (user === null) return false
+        return true
+    }
+
+    getLoggedInUserName() {
+        let user = sessionStorage.getItem(USER_NAME_SESSION_ATTRIBUTE_NAME)
+        if (user === null) return ''
+        return user
+    }
+
+    setupAxiosInterceptors(token) {
+
+        axios.interceptors.request.use(
+            (config) => {
+                if (this.isUserLoggedIn()) {
+                    config.headers.authorization = token
+                }
+                return config
+            }
+        )
+    }
+}
+
+export default new AuthenticationService()
+```
+---
+
+### /src/components/todo/ErrorComponent.jsx
+
+```
+import React from 'react'
+
+function ErrorComponent() {
+    return <div>An Error Occurred. I don't know what to do! Contact support at abcd-efgh-ijkl</div>
+}
+
+export default ErrorComponent
+```
+---
+
+### /src/components/todo/FooterComponent.jsx
+
+```
+import React, {Component} from 'react'
+
+class FooterComponent extends Component {
+    render() {
+        return (
+            <footer className="footer">
+                <span className="text-muted">All Rights Reserved 2022 @in28minutes</span>
+            </footer>
+        )
+    }
+}
+
+export default FooterComponent
+```
+---
+
+### /src/components/todo/HeaderComponent.jsx
+
+```
+import React, {Component} from 'react'
+
+import { Link } from 'react-router-dom'
+
+import AuthenticationService from './AuthenticationService.js'
+
+class HeaderComponent extends Component {
+    render() {
+        const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+        //console.log(isUserLoggedIn);
+
+        return (
+            <header>
+                <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+                    <div><a href="http://www.in28minutes.com" className="navbar-brand">in28Minutes</a></div>
+                    <ul className="navbar-nav">
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/welcome/in28minutes">Home</Link></li>}
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/todos">Todos</Link></li>}
+                    </ul>
+                    <ul className="navbar-nav navbar-collapse justify-content-end">
+                        {!isUserLoggedIn && <li><Link className="nav-link" to="/login">Login</Link></li>}
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Logout</Link></li>}
+                    </ul>
+                </nav>
+            </header>
+        )
+    }
+}
+
+export default HeaderComponent
 ```
 ---
