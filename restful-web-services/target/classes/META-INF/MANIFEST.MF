@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: rangakaranam
+Build-Jdk: 16
+Implementation-Title: restful-web-services
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.in28minutes.rest.webservices
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/restful-web-services
+Created-By: Maven Integration for Eclipse
+

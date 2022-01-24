@@ -536,7 +536,86 @@ Use `AuthenticatedRoute` inside the `element` attribute
 
 ```
 
+## Show Todo Details
+
+#### Change Overview
+
+##### Change 1: TodoApp.jsx - Enable Navigation for ListTodosComponent
+
+```
+//REACT-6
+const ListTodosComponentWithNavigation = withNavigation(ListTodosComponent) 
+
+//REACT-6
+<Route path="/todos" element={
+    <AuthenticatedRoute>
+        <ListTodosComponentWithNavigation /> 
+    </AuthenticatedRoute>
+} />
+
+```
+
+##### Change 1: ListTodosComponent - Use this.props.navigate
+
+```
+updateTodoClicked(id) {
+    this.props.navigate(`/todos/${id}`)//REACT-6
+    //this.props.history.push(`/todos/${id}`)
+```
+
+## Display Todo Details in TodoComponent
+
+#### Change Overview
+
+##### Change 1: TodoComponent - Enable Params and Navigation
+
+```
+class TodoApp extends Component {
+//REACT-6
+const TodoComponentWithParamsAndNavigation = withParams(withNavigation(TodoComponent));
+
+
+//REACT-6
+<Route path="/todos/:id" element={ 
+    <AuthenticatedRoute>
+        <TodoComponentWithParamsAndNavigation />
+    </AuthenticatedRoute>
+} />
+
+```
+
+##### Change 2: TodoComponent constructor - Use this.props.params
+
+```
+class TodoComponent extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            id: this.props.params.id, //REACT-6
+            //id: this.props.match.params.id,
+```
+
+##### Change 3: TodoComponent onSubmit - Use this.props.navigate
+```
+onSubmit(values) {
+
+    //OTHER CODE
+
+    if (this.state.id === -1) {
+        TodoDataService.createTodo(username, todo)
+            .then(() => this.props.navigate('/todos')) //REACT-6
+        //this.props.history.push('/todos')
+    } else {
+        TodoDataService.updateTodo(username, this.state.id, todo)
+            .then(() => this.props.navigate('/todos'))//REACT-6
+        //this.props.history.push('/todos')
+    }
+
+```
+
 ## End of this section
 - Code Backups 
-    - [Before Refactoring](https://github.com/in28minutes/full-stack-with-react-and-spring-boot/blob/master/00000-react-6-updates/react-6-01-single-component-for-all.md)
-    - [After Refactoring](https://github.com/in28minutes/full-stack-with-react-and-spring-boot/blob/master/00000-react-6-updates/react-6-02-after-refactoring.md)
+    - [Section 4 - Step 19 - Before Refactoring](https://github.com/in28minutes/full-stack-with-react-and-spring-boot/blob/master/00000-react-6-updates/react-6-01-single-component-for-all.md)
+    - [Section 4 - Step 20 - After Refactoring](https://github.com/in28minutes/full-stack-with-react-and-spring-boot/blob/master/00000-react-6-updates/react-6-02-after-refactoring.md)
+    - [Final - End of Course](https://github.com/in28minutes/full-stack-with-react-and-spring-boot/blob/master/00000-react-6-updates/react6-03-final.md)
