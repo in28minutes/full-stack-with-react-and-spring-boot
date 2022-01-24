@@ -1,5 +1,14 @@
 # React 5 vs React 6 - Step by Step Changes
 
+- [Step 02](#step-02)
+- [Step 07](#step-07)
+- [Step 08](#step-08)
+- [Step 09](#step-09)
+- [Step 10](#step-10)
+- [Step 12](#step-12)
+- [Step 18](#step-18)
+- [Step 19](#step-19)
+
 
 ## Step 02
 
