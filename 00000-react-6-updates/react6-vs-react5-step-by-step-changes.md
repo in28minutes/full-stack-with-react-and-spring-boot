@@ -49,8 +49,8 @@ Let's get started.
 
 #### Change Overview
 
-1. You do NOT need to use exact anymore!
-2. You should use element={<LoginComponent />} instead of component=LoginComponent
+1. You do NOT need to use `exact` anymore!
+2. You should use `element={<LoginComponent />}` instead of `component=LoginComponent`
 
 #### Final Code for TodoApp
 
@@ -96,7 +96,7 @@ export default withNavigation
 
 ##### Change 2: Use LoginComponentWithNavigation instead of LoginComponent
 
-Use LoginComponentWithNavigation instead of LoginComponent
+Use `LoginComponentWithNavigation` instead of `LoginComponent`
 
 ```
 const LoginComponentWithNavigation = withNavigation(LoginComponent);
@@ -145,8 +145,8 @@ class TodoApp extends Component {
 
 #### Change Overview
 
-1. No need to use a Switch
-2. Use <Route path="*" element={<ErrorComponent />} />
+1. No need to use a `Switch`
+2. Use `<Route path="*" element={<ErrorComponent />} />`
 
 
 ```
@@ -402,18 +402,13 @@ export default TodoApp
 
 ##### Change 1: Use HeaderComponentWithNavigation instead of HeaderComponent
 
-render() method in TodoApp
+`render()` method in `TodoApp`
 ```
-        const HeaderComponentWithNavigation = withNavigation(HeaderComponent);
+    const HeaderComponentWithNavigation = withNavigation(HeaderComponent);
 
-```
-
-render() method in TodoApp
-```
     <HeaderComponentWithNavigation/>
     //<HeaderComponent/>
 ```
-
 
 
 ##### TodoApp after this step
@@ -492,7 +487,7 @@ export default AuthenticatedRoute
 
 ##### Change 3: Usage of AuthenticatedRoute
 
-Use AuthenticatedRoute inside the element attribute
+Use `AuthenticatedRoute` inside the `element` attribute
 
 ```
 //<AuthenticatedRoute path="/welcome/:name" component={WelcomeComponent}/>  //REACT-5
@@ -531,3 +526,8 @@ Use AuthenticatedRoute inside the element attribute
 } />
 
 ```
+
+## End of this section
+- Code Backups 
+    - [Before Refactoring](https://github.com/in28minutes/full-stack-with-react-and-spring-boot/blob/master/00000-react-6-updates/react-6-01-single-component-for-all.md)
+    - [After Refactoring](https://github.com/in28minutes/full-stack-with-react-and-spring-boot/blob/master/00000-react-6-updates/react-6-02-after-refactoring.md)
