@@ -1,5 +1,6 @@
 # React 5 vs React 6 - Step by Step Changes
 
+
 ## Step 02
 
 ### Step 02 - Using Create React App to Create and Launch a React Application
@@ -32,8 +33,8 @@ A number of learners still use React V5 in their projects.
 - Text lectures explain differences between React V5 and next versions!
 
 Here are few quick references:
-- Step by step changes - TODO
-- Code Backup for End of the Section - Before Refactoring, After Refactoring - TODO
+- [Step by step changes - React 6 vs React 5](https://github.com/in28minutes/full-stack-with-react-and-spring-boot/blob/master/00000-react-6-updates/react6-vs-react5-step-by-step-changes.md)
+- Code Backups for this section: [Before Refactoring](https://github.com/in28minutes/full-stack-with-react-and-spring-boot/blob/master/00000-react-6-updates/react-6-01-single-component-for-all.md), [After Refactoring](https://github.com/in28minutes/full-stack-with-react-and-spring-boot/blob/master/00000-react-6-updates/react-6-02-after-refactoring.md)
 
 At the end of each step, we show how you can do the same thing in React V6.
 
