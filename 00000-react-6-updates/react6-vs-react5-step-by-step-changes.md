@@ -8,6 +8,7 @@
 - [Step 12](#step-12)
 - [Step 18](#step-18)
 - [Step 19](#step-19)
+- [Step 47](#step-47)
 
 
 ## Step 02
@@ -536,7 +537,9 @@ Use `AuthenticatedRoute` inside the `element` attribute
 
 ```
 
-## Show Todo Details
+## Step 47
+
+### Step 47 - Creating Todo Component and Handle Routing
 
 #### Change Overview
 

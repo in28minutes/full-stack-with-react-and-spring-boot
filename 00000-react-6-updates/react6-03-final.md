@@ -70,7 +70,8 @@ class ListTodosComponent extends Component {
     }
 
     addTodoClicked() {
-        this.props.history.push(`/todos/-1`)
+        this.props.navigate(`/todos/-1`)//REACT-6
+        //this.props.history.push(`/todos/-1`)
     }
 
     updateTodoClicked(id) {
