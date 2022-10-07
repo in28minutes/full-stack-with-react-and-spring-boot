@@ -2134,8 +2134,9 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${jwt.get.token.uri}")
     private String authenticationPath;
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    //@Autowired why ?? and why configureGlobal ??
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
             .userDetailsService(jwtInMemoryUserDetailsService)
             .passwordEncoder(passwordEncoderBean());
