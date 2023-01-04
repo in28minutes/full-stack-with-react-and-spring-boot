@@ -9,7 +9,7 @@
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.8"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "PORT=4200 react-scripts start",
